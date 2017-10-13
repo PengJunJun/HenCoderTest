@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="0.0"
+        android:textColor="@color/weight_color"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_weight"
+        android:layout_marginLeft="6dp"
+        android:layout_toRightOf="@+id/tv_weight"
+        android:text="kg"
+        android:textColor="@color/weight_color" />
+
+    <com.hencodertest.MintView
+        android:id="@+id/mintView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_weight"
+        android:layout_marginTop="20dp" />
+
+    <View
+        android:layout_width="5dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/mintView"
+        android:layout_centerHorizontal="true"
+        android:background="@color/weight_color"
+        />
+
+</RelativeLayout>
