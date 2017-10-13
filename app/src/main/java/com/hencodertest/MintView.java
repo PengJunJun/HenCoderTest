@@ -141,14 +141,6 @@ public class MintView extends View {
             mMoveDistance = mTotalWidth;
         }
 
-        if (mMoveOffset < mRulerSpaceSize) {
-            scrollBy((int) (mRulerSpaceSize - mMoveOffset), 0);
-            mMoveDistance += (int) (mRulerSpaceSize - mMoveOffset);
-        } else if (mMoveOffset > -mRulerSpaceSize) {
-            scrollBy((int) -(mRulerSpaceSize + mMoveOffset), 0);
-            mMoveDistance += (int) (-(mRulerSpaceSize + mMoveOffset));
-        }
-
         mPrevMovePos = 0;
         mMoveOffset = 0;
 
