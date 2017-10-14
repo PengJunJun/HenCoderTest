@@ -29,8 +29,7 @@ public class MintView extends View {
 
     private int mScreenWidth;
     private int mTotalWidth = (mRulerSpaceSize * 10 * 50);
-    private float mPrevMovePos, mCurrentMovePos;
-    private float mMoveDistance, mMoveOffset;
+    private float mPrevMovePos, mCurrentMovePos, mMoveDistance, mMoveOffset;
 
     private OnSizeChangeListener mOnSizeChangeListener;
     private DecimalFormat mDataFormat = new DecimalFormat("0.0");
@@ -50,6 +49,7 @@ public class MintView extends View {
 
     private void init() {
         mScreenWidth = getResources().getDisplayMetrics().widthPixels;
+        mRulerStartX = mScreenWidth / 2;
         mRulerPaint = new Paint();
         mRulerPaint.setAntiAlias(true);
         mRulerPaint.setColor(getResources().getColor(R.color.ruler_color));
@@ -69,7 +69,6 @@ public class MintView extends View {
     }
 
     private void drawPointer(Canvas canvas) {
-        mRulerStartX = mScreenWidth / 2;
         Rect pointer = new Rect(mRulerStartX, 0, mRulerStartX + 10, mRulerHeight);
         canvas.drawLine(pointer.left, 0, pointer.left + mTotalWidth, 0, mRulerPaint);
     }
@@ -108,6 +107,7 @@ public class MintView extends View {
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+                handMoveOffset();
                 handleActionUp();
                 break;
         }
@@ -141,17 +141,26 @@ public class MintView extends View {
             mMoveDistance = mTotalWidth;
         }
 
-        mPrevMovePos = 0;
-        mMoveOffset = 0;
-
         if (mOnSizeChangeListener != null) {
             onSizeChange();
+        }
+
+        mMoveOffset = 0;
+        mPrevMovePos = 0;
+    }
+
+    private void handMoveOffset() {
+        int descPos = (int) (mMoveDistance / mRulerSpaceSize);
+        int scrollDis = descPos * mRulerSpaceSize;
+        int differ = (int) (scrollDis - mMoveDistance);
+        if (differ != 0) {
+            scrollBy(differ, 0);
+            mMoveDistance += differ;
         }
     }
 
     private void onSizeChange() {
-        float pos = (mMoveDistance / (mRulerSpaceSize + mRulerLineWidth) / 10);
-        mOnSizeChangeListener.onSizeChange(mDataFormat.format(pos) + "");
+        mOnSizeChangeListener.onSizeChange(mDataFormat.format(mMoveDistance / mRulerSpaceSize / 10) + "");
     }
 
     @Override

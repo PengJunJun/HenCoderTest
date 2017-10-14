@@ -30,7 +30,7 @@
         android:layout_marginTop="20dp" />
 
     <View
-        android:layout_width="5dp"
+        android:layout_width="2.5dp"
         android:layout_height="50dp"
         android:layout_alignTop="@+id/mintView"
         android:layout_centerHorizontal="true"
